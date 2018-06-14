@@ -130,8 +130,6 @@ Why you would want to use "range" over "len" would of course be completely depen
 
 > flag.Arg(i) returns the i'th CLI argument, while flag.Args() returns the **non-flag** CLI arguments.
 
-Now that we can loop through the arguments and print them on the screen (as I assume you are not using Teletype), **
-
 ## Using the flag package
 
 Using the flag package, we can take flags entered at the time of running the program and parse them, and hence we can do some more action with the flags/arguments that we pass. The **flag.StringVar** function takes the follwing input:
