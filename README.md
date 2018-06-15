@@ -1,10 +1,14 @@
 # Short introduction to CLI creation in Go
 
+![Go CLI tutorial](/img/gocli1.png)
+
 ## Introduction
 
 There already exists many third-party packages that you can use to create command line interfaces in Go, but this tutorial is going to focus on making CLIs using only the standard library.
 
 In other words, "build your own fucking birdfeeder".
+
+[All files presented can be found on my GitHub](https://github.com/vagnes/go-cli-tutorial).
 
 ## Getting started
 
@@ -14,7 +18,7 @@ We are going to use three main standard library packages for this tutorial:
 2. [flag](https://golang.org/pkg/flag/) - CLI flag parsing
 3. [os](https://golang.org/pkg/os/) - Platform independent OS functionality
 
-This tutorial assume basic knowledge of Go, but should be pretty easy to understand regardless.
+This tutorial assumes basic knowledge of Go, but should be pretty easy to understand regardless.
 
 ## Simple CLI
 
@@ -61,7 +65,7 @@ func main() {
 
 It will have the following output:
 
-```text
+```
 go run 1-2.go foo bar
 
 Argument No. : 0 (/tmp/go-build501384166/command-line-arguments/_obj/exe/1-2)
@@ -77,7 +81,7 @@ main.main()
 exit status 2
 ```
 
-The error is expected as we are looping over a silce of strings, which are the arguments stored in os.Args, and there are only three arguments; the first argument being the name of the program itself, and the "foo" and "bar" supplied by us in the terminal. This can be easily fixed by finding the number of strings in os.Args, by doing the following.
+The error is expected as we are looping over a slice of strings, which are the arguments stored in os.Args, and there are only three arguments; the first argument being the name of the program itself, and the "foo" and "bar" supplied by us in the terminal. This can be easily fixed by finding the number of strings in os.Args, by doing the following.
 
 ref. 1-3
 
@@ -126,13 +130,13 @@ Argument No.1: foo
 Argument No.2: bar
 ```
 
-Why you would want to use "range" over "len" would of course be completely dependant on the context, but there is no wonder which way is more consice.
+Why you would want to use "range" over "len" would of course be completely dependent on the context, but there is no wonder which way is more concise.
 
 > flag.Arg(i) returns the i'th CLI argument, while flag.Args() returns the **non-flag** CLI arguments.
 
 ## Using the flag package
 
-Using the flag package, we can take flags entered at the time of running the program and parse them, and hence we can do some more action with the flags/arguments that we pass. The **flag.StringVar** function takes the follwing input:
+Using the flag package, we can take flags entered at the time of running the program and parse them, and hence we can do some more action with the flags/arguments that we pass. The **flag.StringVar** function takes the following input:
 
 ```go
 StringVar func(p *string, name string, value string, usage string)
@@ -167,9 +171,9 @@ func main() {
 }
 ```
 
-Please note that you should never do this, as it is really simple to dissasemble the program and extract the plain text password even though the dissasembly of Go is arguably more messy than of a C program, as demonstrated below.
+Please note that you should never do this, as it is really simple to disassemble the program and extract the plain text password even though the disassembly of Go is arguably more messy than of a C program, as demonstrated below.
 
-```asm
+```
 mov     rcx, [rax]
 mov     [rsp+98h+usage.str], rcx
 mov     rcx, [rax+8]
@@ -236,7 +240,7 @@ func main() {
 }
 ```
 
-```text
+```
 go run 2-1.go -o "/" 1 2 3 4 5 6 7 8 9 10
 
 1.00 / 2.00 = 0.50
